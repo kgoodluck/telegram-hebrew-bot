@@ -1,0 +1,30 @@
+import { formatSentence } from "../../utils/formatSentence.js";
+import { resetSession } from "../../sessionManager.js";
+import { sendNextSentence } from "../sendNextSentence.js";
+
+export async function stepFour(ctx, session) {
+    const correctSentence = session.sentences[session.currentIndex].hebrew;
+    const formattedSentence = formatSentence(correctSentence);
+    const userInput = formatSentence(ctx.message.text);
+
+    const isCorrectAnswer = userInput === formattedSentence;
+
+    console.log("🚀 ~ handleUserInput ~ userInput:", userInput, isCorrectAnswer);
+
+    if (!isCorrectAnswer) {
+        return ctx.reply("❌ Incorrect! Try again.");
+    }
+
+    ctx.reply(`✅ Correct! Translation: ${session.sentences[session.currentIndex].translation}`);
+    session.currentIndex++;
+
+    const isHasMoreSentences = session.currentIndex < session.sentences.length;
+
+    if (isHasMoreSentences) {
+        return setTimeout(() => sendNextSentence(ctx, session), 500);
+    }
+
+    setTimeout(() => ctx.reply("🎉 You've completed all sentences! Restarting..."), 600);
+    resetSession(ctx.chat.id);
+    setTimeout(() => ctx.reply("How many sentences do you want? (e.g., 5)"), 700);
+}
