@@ -5,7 +5,7 @@ export function generateConfig(prompt) {
             {
                 role: "system",
                 content:
-                    "You are a Hebrew tutor. Respond in JSON format with Hebrew sentences and English translations. Adhear to number of sentences, number of words in a sentence and difficulty level.",
+                    "You are a Hebrew tutor. Respond in JSON format with Hebrew sentences and English translations. Adhear to number of sentences, number of words in a sentence and difficulty level. Hebrew sentences must not have vowel signs",
             },
             { role: "user", content: prompt },
         ],
