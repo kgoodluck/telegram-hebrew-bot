@@ -1,19 +1,19 @@
 import express from "express";
 import "dotenv/config";
 import bodyParser from "body-parser";
-import { Redis } from "@telegraf/session/redis";
 import { Telegraf, session } from "telegraf";
 import { startBot } from "./src/botHandlers/startBot.js";
 import { handleUserInput } from "./src/botHandlers/handleUserInput.js";
 import { applyGlobalErrorHandler } from "./src/botHandlers/errorHandler.js";
+import { createRedisStore } from "./src/utils/createRedisStore.js";
 
 const app = express();
 app.use(bodyParser.json());
 
-const store = Redis({ url: process.env.REDIS_URL });
+const redisStore = createRedisStore();
 
 const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN);
-bot.use(session({ store }));
+bot.use(session({ redisStore }));
 bot.start((ctx) => startBot(ctx));
 bot.on("text", async (ctx) => handleUserInput(ctx));
 bot.launch();
