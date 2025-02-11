@@ -24,7 +24,7 @@ export async function stepFour(ctx, session) {
         return setTimeout(() => sendNextSentence(ctx, session), 500);
     }
 
-    setTimeout(() => ctx.reply("🎉 You've completed all sentences! Restarting..."), 600);
-    resetSession(ctx.chat.id);
+    resetSession(ctx);
+    setTimeout(() => ctx.reply("🎉 You've completed all sentences! Restarting..."), 500);
     setTimeout(() => ctx.reply("How many sentences do you want? (e.g., 5)"), 700);
 }

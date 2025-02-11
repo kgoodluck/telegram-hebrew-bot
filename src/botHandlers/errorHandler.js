@@ -14,7 +14,7 @@ export function applyGlobalErrorHandler(bot) {
     });
 
     bot.action("restart_session", async (ctx) => {
-        resetSession(ctx.chat.id);
+        resetSession(ctx);
         await ctx.reply("Session restarted. How many sentences do you want?");
     });
 

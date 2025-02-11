@@ -4,7 +4,7 @@ export async function stepOne(ctx, session) {
     const numSentences = parseInt(ctx.message.text, 10);
 
     if (!numSentences) {
-        resetSession(ctx.chat.id);
+        resetSession(ctx);
         return ctx.reply("How many sentences do you want? (10 max)");
     }
 

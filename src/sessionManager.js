@@ -1,23 +1,20 @@
 import fs from "fs";
 import path from "path";
 
-const userSessions = {};
-
 export function getSession(ctx) {
-    const { from: user } = ctx.update.message;
-    const { id: chatId } = ctx.chat;
-
-    if (!userSessions[chatId]) {
-        userSessions[chatId] = { step: 1, sentences: [], currentIndex: 0, chatId, user };
+    if (!ctx.session) {
+        ctx.session = { step: 1, sentences: [], currentIndex: 0, chatId: ctx.chat.id, user: ctx.from };
     }
 
-    return userSessions[chatId];
+    return ctx.session;
 }
 
-export function resetSession(chatId) {
+export function resetSession(ctx) {
+    const chatId = ctx.chat.id;
+
     const dirPath = path.join("assets", "images", chatId.toString());
     fs.rmSync(dirPath, { recursive: true, force: true });
-    console.log(chatId + " session finished ")
-    
-    userSessions[chatId] = null;
+
+    console.log(chatId + " session finished ");
+    ctx.session = null;
 }

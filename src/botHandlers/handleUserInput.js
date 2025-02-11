@@ -3,12 +3,10 @@ import { getCurrentStep } from "../userPath/getCurrentStep.js";
 
 export async function handleUserInput(ctx) {
     const session = getSession(ctx);
-    const chatId = ctx.chat.id;
 
     if (ctx.message.text === "Stop") {
-        resetSession(chatId);
-        ctx.reply("The session is stopped. Please text the number of sentences if you want to continue.");
-        return;
+        resetSession(ctx);
+        return ctx.reply("The session is stopped. Please text the number of sentences if you want to continue.");
     }
 
     const stepFunction = getCurrentStep(session.step);
