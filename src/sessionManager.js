@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { logAxiomEvent } from "./utils/logAxiomEvent.js";
 
 export function getSession(ctx) {
     if (!ctx.session) {
@@ -15,6 +16,6 @@ export function resetSession(ctx) {
     const dirPath = path.join("assets", "images", chatId.toString());
     fs.rmSync(dirPath, { recursive: true, force: true });
 
-    console.log(chatId + " session finished ");
+    logAxiomEvent('SESSION_FINISHED', { chatId });
     ctx.session = null;
 }

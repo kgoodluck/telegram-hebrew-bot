@@ -1,6 +1,7 @@
 import { formatSentence } from "../../utils/formatSentence.js";
 import { resetSession } from "../../sessionManager.js";
 import { sendNextSentence } from "../sendNextSentence.js";
+import { logAxiomEvent } from "../../utils/logAxiomEvent.js";
 
 export async function stepFour(ctx, session) {
     const correctSentence = session.sentences[session.currentIndex].hebrew;
@@ -9,7 +10,7 @@ export async function stepFour(ctx, session) {
 
     const isCorrectAnswer = userInput === formattedSentence;
 
-    console.log("🚀 ~ handleUserInput ~ userInput:", userInput, isCorrectAnswer);
+    logAxiomEvent("USER_ANSWER", { chatId: ctx.chat.id, payload: { userInput, isCorrectAnswer } });
 
     if (!isCorrectAnswer) {
         return ctx.reply("❌ Incorrect! Try again.");

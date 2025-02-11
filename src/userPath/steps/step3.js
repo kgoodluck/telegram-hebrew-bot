@@ -1,6 +1,7 @@
 import { getSentences } from "../../openAI/getSentences.js";
 import { generateImages } from "../../generateImages/generateImages.js";
 import { sendNextSentence } from "../sendNextSentence.js";
+import { logAxiomEvent } from "../../utils/logAxiomEvent.js";
 
 export async function stepThree(ctx, session) {
     const difficulty = parseInt(ctx.message.text, 10);
@@ -21,7 +22,7 @@ export async function stepThree(ctx, session) {
     await generateImages(session);
     session.currentIndex = 0;
 
-    console.log("🚀 ~ stepThree ~ session started:", session);
+    logAxiomEvent("SESSION_DETAILS", { chatId: ctx.chat.id, payload: { session } });
 
     sendNextSentence(ctx, session);
     return;
