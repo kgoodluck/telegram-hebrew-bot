@@ -4,6 +4,7 @@ import bodyParser from "body-parser";
 import { Telegraf } from "telegraf";
 import { startBot } from "./src/botHandlers/startBot.js";
 import { handleUserInput } from "./src/botHandlers/handleUserInput.js";
+import { applyGlobalErrorHandler } from "./src/botHandlers/errorHandler.js";
 
 const app = express();
 const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN);
@@ -15,9 +16,7 @@ bot.on("text", async (ctx) => handleUserInput(ctx));
 
 bot.launch();
 
-// Enable graceful stop
-process.once('SIGINT', () => bot.stop('SIGINT'));
-process.once('SIGTERM', () => bot.stop('SIGTERM'));
+applyGlobalErrorHandler(bot);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
