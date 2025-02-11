@@ -2,7 +2,7 @@ export function generatePrompt(userInput) {
     const { numSentences, maxWords, difficulty } = checkUserInput(userInput);
 
     const prompt = `Give ${numSentences} Hebrew sentences with a maximum of ${maxWords} words. 
-    The sentences should be in the present tense and align with difficulty level ${difficulty}.
+    The sentences should align with difficulty level ${difficulty} out of 5.
     ${difficultyDescriptions[difficulty]} 
     Return them as JSON with 'hebrew' and 'translation' fields.`;
 
