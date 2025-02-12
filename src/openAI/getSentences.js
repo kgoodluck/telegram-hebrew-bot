@@ -11,7 +11,7 @@ const openAI = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 export async function getSentences(numSentences, maxWords, difficulty, language) {
     const prompt = generatePrompt({ numSentences, maxWords, difficulty, language });
-    const openAIConfig = generateConfig(prompt);
+    const openAIConfig = generateConfig({ prompt, language });
 
     logAxiomEvent("CONFIG_GENERATED", { payload: { openAIConfig } });
 

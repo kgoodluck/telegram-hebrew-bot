@@ -2,9 +2,9 @@ export function generatePrompt(userInput) {
     const { numSentences, maxWords, difficulty, language } = checkUserInput(userInput);
 
     const prompt = `Give ${numSentences} Hebrew sentences with a maximum of ${maxWords} words.
-The sentences should have a translation to ${languageName[language]} and also include the Hebrew pronunciation in ${languageName[language]} alphabet (e.g., for Russian, "Шалом" for "שלום") to match the language.
 The sentences should align with difficulty level ${difficulty} out of 5.
 ${difficultyDescriptions[difficulty]}
+The sentences should have a translation to ${languageName[language]} and also include the Hebrew pronunciation in ${languageName[language]}, as if you used ${languageName[language]} to write the sounds of Hebrew (e.g., ${example[language]}).
 Return them as JSON with 'hebrew', 'translation', and 'nativePronunciation' fields.`;
     
     console.log("🚀 ~ generatePrompt ~ prompt:", prompt);
@@ -20,7 +20,14 @@ const difficultyDescriptions = {
     5: "Professional-level Hebrew, like a native speaker would use in formal writing.",
 };
 
-const languageName = {
+const example = {
+    es: "'Ez-ra, lo ya-da-ti she-ha-yom sha-bat' for 'עזרה, לא ידעתי שהיום שבת'",
+    en: "'Ehz-rah, lo yah-dah-tee sheh hah-yohm Shah-baht' for 'עזרה, לא ידעתי שהיום שבת'",
+    ru: "'Эзра, ло йодати ше hа-йом шабат' for 'עזרה, לא ידעתי שהיום שבת'",
+    fr: "'Ez-ra, lo ya-da‑ti che-ha-yom cha-bat' for 'עזרה, לא ידעתי שהיום שבת'",
+}
+
+export const languageName = {
     es: "Spanish",
     en: "English",
     ru: "Russian",
