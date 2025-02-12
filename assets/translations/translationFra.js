@@ -1,0 +1,18 @@
+export const translationFra = {
+    CHOOSE_LANGUAGE: "Choisissez la langue du bot :",
+    LANGUAGE_IS_SET: "Votre langue a été définie sur le français.",
+    PROMPT_NUMBER_OF_SENTENCES: "Combien de phrases voulez-vous ? (par ex., 5)",
+    PROMPT_MAX_WORDS: "Nombre maximum de mots par phrase ? (15 max)",
+    PROMPT_DIFFICULTY_LEVEL: "Choisissez un niveau de difficulté de 1 à 5 (1 — facile, 5 — professionnel)",
+    GENERATING_SENTENCES: "Génération des phrases, veuillez patienter...",
+    INCORRECT_ANSWER: "❌ Incorrect ! Essayez encore.",
+    CORRECT_ANSWER: "✅ Correct ! Traduction : ",
+    TASK_COMPLETED: "🎉 Vous avez terminé toutes les phrases ! Redémarrage...",
+    ERROR_DIFFICULTY_LEVEL: "Niveau invalide ! Veuillez entrer un nombre de 1 à 5",
+    ERROR_SOMETHING_WENT_WRONG: "⚠️ Oups ! Quelque chose s'est mal passé. Cliquez ci-dessous pour redémarrer.",
+    RESTART_BUTTON_TEXT: "Redémarrer",
+    SESSION_RESTARTED: "Session redémarrée. Combien de phrases voulez-vous ?",
+    SESSION_ABORTED: "La session est arrêtée. Veuillez saisir le nombre de phrases si vous souhaitez continuer.",
+    UNEXPECTED_STEP: "Étape inattendue. Veuillez redémarrer la session",
+    SENTENCE_REQUEST: " Tapez la phrase suivante :",
+};
