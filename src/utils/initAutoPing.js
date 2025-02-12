@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export async function initAutoPing(app) {
     app.get("/ping", (req, res) => {
         res.send("pong");
@@ -8,9 +10,7 @@ export async function initAutoPing(app) {
 
         setInterval(async () => {
             try {
-                const res = await fetch(`${PUBLIC_URL}/ping`);
-                const text = await res.text();
-                console.log("✅✅✅ Keep-alive ping response:", text);
+                const response = await axios.get(`${PUBLIC_URL}/ping`);
             } catch (error) {
                 console.error("❌❌❌ Keep-alive ping failed:", error);
             }
