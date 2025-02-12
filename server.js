@@ -7,6 +7,7 @@ import { handleUserInput } from "./src/botHandlers/handleUserInput.js";
 import { applyGlobalErrorHandler } from "./src/botHandlers/errorHandler.js";
 import { Redis } from "@telegraf/session/redis";
 import { initAutoPing } from "./src/utils/initAutoPing.js";
+import { handleUserAction } from "./src/botHandlers/handleUserAction.js";
 
 const app = express();
 app.use(bodyParser.json());
@@ -17,6 +18,7 @@ const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN);
 bot.use(session({ store }));
 bot.start((ctx) => startBot(ctx));
 bot.on("text", async (ctx) => handleUserInput(ctx));
+bot.action(/.*/, handleUserAction);
 bot.launch();
 
 applyGlobalErrorHandler(bot);
