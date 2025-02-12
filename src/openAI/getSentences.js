@@ -8,8 +8,8 @@ import { mockData } from "./mockData.js";
 
 const openAI = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-export async function getSentences(numSentences, maxWords, difficulty) {
-    const prompt = generatePrompt({ numSentences, maxWords, difficulty });
+export async function getSentences(numSentences, maxWords, difficulty, language) {
+    const prompt = generatePrompt({ numSentences, maxWords, difficulty, language });
     const openAIConfig = generateConfig(prompt);
 
     try {
